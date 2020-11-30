@@ -1,4 +1,4 @@
-package by.learning.hospital.exception;
+package by.learning.hospital.model.exception;
 
 public class DeletingException extends Exception {
 

@@ -1,14 +1,18 @@
 package by.learning.hospital.model.dao.impl;
 
-import by.learning.hospital.exception.*;
 import by.learning.hospital.model.dao.PatientDao;
 import by.learning.hospital.model.dao.storage.PatientWareHouse;
 import by.learning.hospital.model.entity.Diagnosis;
 import by.learning.hospital.model.entity.Patient;
+import by.learning.hospital.model.exception.AddingException;
+import by.learning.hospital.model.exception.DeletingException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 public class PatientDaoImpl implements PatientDao {
 

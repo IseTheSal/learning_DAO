@@ -1,8 +1,9 @@
 package by.learning.hospital.model.dao.impl;
 
-import by.learning.hospital.exception.*;
 import by.learning.hospital.model.entity.Diagnosis;
 import by.learning.hospital.model.entity.Patient;
+import by.learning.hospital.model.exception.AddingException;
+import by.learning.hospital.model.exception.DeletingException;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
