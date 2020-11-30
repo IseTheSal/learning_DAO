@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <Console name="Console" target="System.out">
+            <PatternLayout pattern="%d{dd-MM-yyyy HH:mm:ss} %-5level %logger{1} - %msg%n"/>
+        </Console>
+        <RollingFile name="File" fileName="logs/log.txt" append="true"
+                     filePattern="logs/${date:yyyy-MM-dd}/%d{dd-MM-yyyy_HH-mm}_%i.txt">
+            <PatternLayout pattern="%d{ISO8601} %M %-5level %logger{5} - %msg%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="15KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="5"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+        </Root>
+    </Loggers>
+</Configuration>
