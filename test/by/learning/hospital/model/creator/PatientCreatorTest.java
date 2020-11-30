@@ -21,7 +21,7 @@ public class PatientCreatorTest {
     final String PATIENTS_PATH = "data\\fillPatients.txt";
 
     @BeforeClass
-    public void patientSetup() {
+    public void init() {
         patientCreator = new PatientCreator();
     }
 

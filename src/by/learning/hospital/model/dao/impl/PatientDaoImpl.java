@@ -8,10 +8,7 @@ import by.learning.hospital.model.entity.Patient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 public class PatientDaoImpl implements PatientDao {
 
@@ -76,7 +73,7 @@ public class PatientDaoImpl implements PatientDao {
         Optional<Patient> optionalPatient = findById(id);
         if (optionalPatient.isPresent()) {
             Patient patient = optionalPatient.get();
-            patient.setDiagnoses(diagnoses);
+            diagnoses.forEach(patient::addDiagnose);
             Integer index = findPatientIndex(patient).get();
             INSTANCE.update(index, patient);
             logger.info("patient with id = " + id + " was updated");

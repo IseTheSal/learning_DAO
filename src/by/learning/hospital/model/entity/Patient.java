@@ -89,11 +89,12 @@ public class Patient {
     }
 
     public Set<Diagnosis> getDiagnoses() {
-        return diagnoses;
+        return EnumSet.copyOf(this.diagnoses);
     }
 
-    public void setDiagnoses(Set<Diagnosis> diagnoses) {
-        this.diagnoses = diagnoses;
+
+    public void addDiagnose(Diagnosis diagnose) {
+        diagnoses.add(diagnose);
     }
 
     @Override
