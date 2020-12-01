@@ -1,14 +1,14 @@
-package by.learning.hospital.model.util;
+package by.learning.hospital.util;
 
-public class PatientIdGenerator {
+ public class IdGenerator {
 
     private static int currentId = 0;
+
+    private static int currentMedicalCardId = 0;
 
     public static int getCurrentId() {
         return currentId++;
     }
-
-    private static int currentMedicalCardId = 0;
 
     public static int getCurrentMedicalCardId() {
         return currentMedicalCardId++;

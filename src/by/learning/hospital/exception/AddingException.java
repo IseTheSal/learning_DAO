@@ -1,6 +1,6 @@
-package by.learning.hospital.model.exception;
+package by.learning.hospital.exception;
 
-public class AddingException extends Exception {
+ public class AddingException extends Exception {
 
     public AddingException() {
     }

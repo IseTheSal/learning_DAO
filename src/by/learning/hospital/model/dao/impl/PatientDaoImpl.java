@@ -1,11 +1,11 @@
 package by.learning.hospital.model.dao.impl;
 
+import by.learning.hospital.exception.AddingException;
+import by.learning.hospital.exception.DeletingException;
 import by.learning.hospital.model.dao.PatientDao;
 import by.learning.hospital.model.dao.storage.PatientWareHouse;
 import by.learning.hospital.model.entity.Diagnosis;
 import by.learning.hospital.model.entity.Patient;
-import by.learning.hospital.model.exception.AddingException;
-import by.learning.hospital.model.exception.DeletingException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
