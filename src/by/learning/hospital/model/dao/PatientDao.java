@@ -1,10 +1,10 @@
 package by.learning.hospital.model.dao;
 
 
-import by.learning.hospital.model.entity.Diagnosis;
-import by.learning.hospital.model.entity.Patient;
 import by.learning.hospital.exception.AddingException;
 import by.learning.hospital.exception.DeletingException;
+import by.learning.hospital.model.entity.Diagnosis;
+import by.learning.hospital.model.entity.Patient;
 
 import java.util.List;
 import java.util.Optional;

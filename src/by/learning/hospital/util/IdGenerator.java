@@ -1,6 +1,6 @@
 package by.learning.hospital.util;
 
- public class IdGenerator {
+public class IdGenerator {
 
     private static int currentId = 0;
 

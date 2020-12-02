@@ -1,6 +1,6 @@
 package by.learning.hospital.exception;
 
- public class DeletingException extends Exception {
+public class DeletingException extends Exception {
 
     public DeletingException() {
     }
