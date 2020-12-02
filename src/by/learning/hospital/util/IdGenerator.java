@@ -2,15 +2,15 @@ package by.learning.hospital.util;
 
 public class IdGenerator {
 
-    private static int currentId = 0;
+    private static long currentId = 0;
 
-    private static int currentMedicalCardId = 0;
+    private static long currentMedicalCardId = 0;
 
-    public static int getCurrentId() {
+    public static long getCurrentId() {
         return currentId++;
     }
 
-    public static int getCurrentMedicalCardId() {
+    public static long getCurrentMedicalCardId() {
         return currentMedicalCardId++;
     }
 }

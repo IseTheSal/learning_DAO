@@ -1,4 +1,4 @@
-package by.learning.hospital.model.creator;
+package by.learning.hospital.model.reader;
 
 import by.learning.hospital.model.entity.Patient;
 import org.apache.logging.log4j.LogManager;
@@ -11,9 +11,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-public class PatientCreator {
+public class PatientReader {
+    private static final Logger logger = LogManager.getLogger(PatientReader.class);
 
-    private static final Logger logger = LogManager.getLogger(PatientCreator.class);
+    private static final String DELIMITER = "&";
 
     public Optional<Patient> createPatient(File file) {
         Optional<Patient> result = Optional.empty();
@@ -21,7 +22,7 @@ public class PatientCreator {
         try {
             scanner = new Scanner(file);
             String fullPatient = scanner.nextLine();
-            String[] fullPatientFields = fullPatient.split("&");
+            String[] fullPatientFields = fullPatient.split(DELIMITER);
             String firstName = fullPatientFields[0];
             String secondName = fullPatientFields[1];
             String patronymic = fullPatientFields[2];
@@ -30,7 +31,7 @@ public class PatientCreator {
             Patient patient = new Patient(firstName, secondName, patronymic, address, phoneNumber);
             result = Optional.of(patient);
         } catch (FileNotFoundException e) {
-            logger.error("Error in create patient: " + e);
+            logger.error("Error in create patient: ", e);
         } finally {
             scanner.close();
         }
@@ -44,7 +45,7 @@ public class PatientCreator {
             scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 String fullPatient = scanner.nextLine();
-                String[] fullPatientFields = fullPatient.split("&");
+                String[] fullPatientFields = fullPatient.split(DELIMITER);
                 String firstName = fullPatientFields[0];
                 String secondName = fullPatientFields[1];
                 String patronymic = fullPatientFields[2];
@@ -54,11 +55,10 @@ public class PatientCreator {
                 result.add(patient);
             }
         } catch (FileNotFoundException e) {
-            logger.error("Error in create patient: " + e);
+            logger.error("Error in create patient: ", e);
         } finally {
             scanner.close();
         }
         return result;
     }
-
 }

@@ -1,7 +1,6 @@
 package by.learning.hospital.model.dao.impl;
 
-import by.learning.hospital.exception.AddingException;
-import by.learning.hospital.exception.DeletingException;
+import by.learning.hospital.exception.DaoException;
 import by.learning.hospital.model.entity.Diagnosis;
 import by.learning.hospital.model.entity.Patient;
 import org.testng.Assert;
@@ -25,7 +24,7 @@ public class PatientDaoImplTest {
 
     @BeforeClass
     public void init() {
-        patientDao = PatientDaoImpl.getInstance();
+        patientDao = PatientDaoImpl.getWareHouse();
         patient = new Patient();
     }
 
@@ -36,12 +35,13 @@ public class PatientDaoImplTest {
 
     @Test
     public void testContains() {
+        boolean condition = false;
         try {
             patientDao.add(id, patient);
-        } catch (AddingException e) {
+            condition = patientDao.contains(patient);
+        } catch (DaoException e) {
             Assert.fail();
         }
-        boolean condition = patientDao.contains(patient);
         Assert.assertTrue(condition);
     }
 
@@ -49,7 +49,7 @@ public class PatientDaoImplTest {
     public void testAdd() {
         try {
             patientDao.add(id, patient);
-        } catch (AddingException e) {
+        } catch (DaoException e) {
             Assert.fail();
         }
     }
@@ -59,56 +59,58 @@ public class PatientDaoImplTest {
         try {
             patientDao.add(id, patient);
             patientDao.delete(patient);
-        } catch (DeletingException | AddingException e) {
+        } catch (DaoException e) {
             Assert.fail();
         }
     }
 
     @Test(groups = "patient")
     public void testUpdatePatientDiagnosisById() {
+        Set<Diagnosis> actual = EnumSet.of(Diagnosis.ALLERGIC_RHINITIS, Diagnosis.ANXIETY);
         try {
             patientDao.add(id, patient);
-        } catch (AddingException e) {
+            patientDao.updatePatientDiagnosisById(0, actual);
+        } catch (DaoException e) {
             Assert.fail();
         }
-        Set<Diagnosis> actual = EnumSet.of(Diagnosis.ALLERGIC_RHINITIS, Diagnosis.ANXIETY);
-        patientDao.updatePatientDiagnosisById(0, actual);
         Set<Diagnosis> expected = patient.getDiagnoses();
         Assert.assertEquals(actual, expected);
     }
 
     @Test
     public void testFindById() {
+        boolean condition = false;
         try {
             patientDao.add(id, patient);
-        } catch (AddingException e) {
+            condition = patientDao.findById(id).isPresent();
+        } catch (DaoException e) {
             Assert.fail();
         }
-        boolean condition = patientDao.findById(id).isPresent();
         Assert.assertTrue(condition);
     }
 
     @Test
     public void testFindAll() {
+        boolean condition = true;
         try {
             patientDao.add(id, patient);
-        } catch (AddingException e) {
+            condition = patientDao.findAll().isEmpty();
+        } catch (DaoException e) {
             Assert.fail();
         }
-        boolean condition = patientDao.findAll().isEmpty();
         Assert.assertFalse(condition);
     }
 
     @Test
     public void testFindPatientIndex() {
+        Integer actual = null;
         try {
             patientDao.add(id, patient);
-        } catch (AddingException e) {
+            if (patientDao.findPatientIndex(patient).isPresent()) {
+                actual = patientDao.findPatientIndex(patient).get();
+            }
+        } catch (DaoException e) {
             Assert.fail();
-        }
-        Integer actual = null;
-        if (patientDao.findPatientIndex(patient).isPresent()) {
-            actual = patientDao.findPatientIndex(patient).get();
         }
         Integer expected = 0;
         Assert.assertEquals(actual, expected);
@@ -118,14 +120,14 @@ public class PatientDaoImplTest {
     public void testFindByAddress() {
         String address = "Novay 9";
         patient.setAddress(address);
+        Patient actual = null;
         try {
             patientDao.add(id, patient);
-        } catch (AddingException e) {
+            if (patientDao.findByAddress(address).isPresent()) {
+                actual = patientDao.findByAddress(address).get();
+            }
+        } catch (DaoException e) {
             Assert.fail();
-        }
-        Patient actual = null;
-        if (patientDao.findByAddress(address).isPresent()) {
-            actual = patientDao.findByAddress(address).get();
         }
         Patient expected = patient;
         Assert.assertEquals(actual, expected);
@@ -133,16 +135,17 @@ public class PatientDaoImplTest {
 
     @Test(groups = "findAll")
     public void testFindAllByMedicalCardRange() {
+        List<Patient> actual = new ArrayList<>();
         try {
             patientDao.add(id, patient);
             patientDao.add(id2, patient2);
-        } catch (AddingException e) {
+            actual = patientDao.findAllByMedicalCardRange(0, 1);
+        } catch (DaoException e) {
             Assert.fail();
         }
         List<Patient> expected = new ArrayList<>();
         expected.add(patient2);
         expected.add(patient);
-        List<Patient> actual = patientDao.findAllByMedicalCardRange(0, 1);
         Assert.assertEquals(actual, expected);
     }
 
@@ -150,7 +153,7 @@ public class PatientDaoImplTest {
     public void deletePatient2() {
         try {
             patientDao.delete(patient2);
-        } catch (DeletingException e) {
+        } catch (DaoException e) {
             e.printStackTrace();
         }
     }
@@ -159,7 +162,7 @@ public class PatientDaoImplTest {
     public void deletePatient() {
         try {
             patientDao.delete(patient);
-        } catch (DeletingException e) {
+        } catch (DaoException e) {
             e.printStackTrace();
         }
     }

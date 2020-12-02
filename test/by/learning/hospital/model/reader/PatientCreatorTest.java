@@ -1,4 +1,4 @@
-package by.learning.hospital.model.creator;
+package by.learning.hospital.model.reader;
 
 import by.learning.hospital.model.entity.Patient;
 import org.testng.Assert;
@@ -14,7 +14,7 @@ import java.util.Optional;
 
 public class PatientCreatorTest {
 
-    PatientCreator patientCreator;
+    PatientReader patientCreator;
     List<Patient> patientList;
 
     final String ONE_PATIENT_PATH = "data\\patient.txt";
@@ -22,7 +22,7 @@ public class PatientCreatorTest {
 
     @BeforeClass
     public void init() {
-        patientCreator = new PatientCreator();
+        patientCreator = new PatientReader();
     }
 
     @BeforeMethod(onlyForGroups = "fillArray")

@@ -7,13 +7,13 @@ import java.util.Set;
 
 public class Patient {
 
-    private int id = IdGenerator.getCurrentId();
+    private long id = IdGenerator.getCurrentId();
     private String firstName;
     private String secondName;
     private String patronymic;
     private String address;
     private String phoneNumber;
-    private int medicalCardId = IdGenerator.getCurrentMedicalCardId();
+    private long medicalCardId = IdGenerator.getCurrentMedicalCardId();
     private Set<Diagnosis> diagnoses = EnumSet.noneOf(Diagnosis.class);
 
     public Patient() {
@@ -36,7 +36,7 @@ public class Patient {
         this.diagnoses = diagnoses;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -80,7 +80,7 @@ public class Patient {
         this.phoneNumber = phoneNumber;
     }
 
-    public int getMedicalCardId() {
+    public long getMedicalCardId() {
         return medicalCardId;
     }
 
@@ -115,13 +115,13 @@ public class Patient {
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (secondName != null ? secondName.hashCode() : 0);
         result = 31 * result + (patronymic != null ? patronymic.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
         result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
-        result = 31 * result + medicalCardId;
+        result = 31 * result + (int) (medicalCardId ^ (medicalCardId >>> 32));
         result = 31 * result + (diagnoses != null ? diagnoses.hashCode() : 0);
         return result;
     }
