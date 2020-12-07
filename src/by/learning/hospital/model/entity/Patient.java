@@ -113,6 +113,7 @@ public class Patient {
         return diagnoses != null ? diagnoses.equals(patient.diagnoses) : patient.diagnoses == null;
     }
 
+
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
