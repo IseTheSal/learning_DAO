@@ -16,11 +16,9 @@ import java.util.Optional;
 import java.util.Set;
 
 public class PatientServiceImpl implements PatientService {
-
     private static final Logger logger = LogManager.getLogger(PatientServiceImpl.class);
 
     private static final PatientDaoImpl PATIENT_DAO = PatientDaoImpl.getWareHouse();
-
 
     @Override
     public void add(int index, Patient patient) throws ServiceException {
@@ -63,7 +61,6 @@ public class PatientServiceImpl implements PatientService {
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
-
     }
 
     @Override

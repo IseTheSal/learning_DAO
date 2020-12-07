@@ -5,10 +5,10 @@ import by.learning.hospital.model.entity.Patient;
 
 import java.util.Comparator;
 
-public class PatientCompareSecondNameDesc implements Comparator<Patient> {
+public class PatientCompareAddress implements Comparator<Patient> {
 
     @Override
     public int compare(Patient o1, Patient o2) {
-        return o2.getSecondName().compareTo(o1.getSecondName());
+        return o1.getAddress().compareTo(o2.getAddress());
     }
 }
